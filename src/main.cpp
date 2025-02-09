@@ -34,7 +34,6 @@ int main(void)
     bool enable_vsync = false;
     glm::vec3 clear_color = {0.9, 0.9, 1};
 
-    std::cout << RESOURCES_DIR << '\n';
     std::cout << glGetString(GL_VENDOR) << '\n';
     std::cout << glGetString(GL_RENDERER) << '\n';
     std::cout << glGetString(GL_VERSION) << std::endl;
@@ -58,7 +57,7 @@ int main(void)
     style.FrameRounding = 3;
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
-        style.WindowRounding = 10.0f;
+        style.WindowRounding = 9.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
 
