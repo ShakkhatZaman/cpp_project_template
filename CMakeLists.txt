@@ -17,14 +17,21 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 ##<-- Add subdirectories for different libtraries here -->##
-add_subdirectory(libs/glfw)
-add_subdirectory(libs/glad)
-add_subdirectory(libs/glm)
-add_subdirectory(libs/stb_image)
+add_subdirectory(lib/glfw)
+add_subdirectory(lib/glad)
+add_subdirectory(lib/glm)
+add_subdirectory(lib/stb_image)
+add_subdirectory(lib/imgui-docking)
 
 # find and set all source files and libraries
 file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp")
-set(LINKING_LIBRARIES glfw glad glm stb_image)
+set(LINKING_LIBRARIES
+    glfw
+    glad
+    glm
+    imgui
+    stb_image
+)
 
 add_executable(${PROJECT_NAME})
 
@@ -32,10 +39,10 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC GLFW_INCLUDE_NONE)
 
 if(RELEASE_BUILD)
     set(CMAKE_BUILD_TYPE Release)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCES_DIR="res/")
+    target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCES_DIR="./res")
 else()
     set(CMAKE_BUILD_TYPE Debug)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCES_DIR="${CMAKE_SOURCE_DIR}/res/")
+    target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCES_DIR="${CMAKE_SOURCE_DIR}/res")
 endif()
 
 if(DEBUGGING_FEATURES)
